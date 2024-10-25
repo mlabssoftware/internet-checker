@@ -1,0 +1,23 @@
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: internet-checker
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  vpc:
+    securityGroupIds:
+      - sg-0bb36368562664db1
+    subnetIds:
+      - subnet-08b420e9d1dd8e7c2
+      - subnet-071f9c1c9c8c90480
+      - subnet-077eb95e9e49a6903
+
+functions:
+  checkInternet:
+    handler: handler.checkInternet
+    events:
+      - http:
+          path: check
+          method: get
